@@ -1,4 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:another_flushbar/flushbar.dart';
+import 'package:tugasakhir/models/registerstful.dart';
+import '../providers/auth.dart';
 
 class RegisterWidget extends StatefulWidget {
   const RegisterWidget({Key? key}) : super(key: key);
@@ -8,32 +13,24 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late TextEditingController _textController1;
-  late TextEditingController _textController2;
-  late TextEditingController _textController3;
-  late TextEditingController _textController4;
-  late TextEditingController _textController5;
+  final GlobalKey<FormState> _registerKey = GlobalKey<FormState>();
+
+  /* register variable data */
+
+  final name = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final confirmPassword = TextEditingController();
+
   bool _passwordVisibility1 = true;
   bool _passwordVisibility2 = true;
 
   @override
-  void initState() {
-    super.initState();
-    _textController1 = TextEditingController();
-    _textController2 = TextEditingController();
-    _textController3 = TextEditingController();
-    _textController4 = TextEditingController();
-    _textController5 = TextEditingController();
-  }
-
-  @override
   void dispose() {
-    _textController1.dispose();
-    _textController2.dispose();
-    _textController3.dispose();
-    _textController4.dispose();
-    _textController5.dispose();
+    name.dispose();
+    email.dispose();
+    password.dispose();
+    confirmPassword.dispose();
     super.dispose();
   }
 
@@ -49,12 +46,6 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     });
   }
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      // Perform registration logic
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,8 +58,9 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+              /* form register */
               child: Form(
-                key: _formKey,
+                key: _registerKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -81,57 +73,43 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
-                      controller: _textController1,
+                      controller: name,
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Full Name',
+                        hintText: 'Nama Lengkap',
                         prefixIcon: Icon(Icons.person_outline),
                       ),
                       style: Theme.of(context).textTheme.bodyText1,
+                      /* validator */
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your full name';
+                          return 'Anda harus mengisi nama lengkap';
                         }
                         return null;
                       },
+                      // onSaved: (newValue) => name = newValue,
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
-                      controller: _textController2,
+                      controller: email,
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Username',
+                        hintText: 'Email',
                         prefixIcon: Icon(Icons.person_sharp),
                       ),
                       style: Theme.of(context).textTheme.bodyText1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a username';
+                          return 'Anda harus mengisi alamat email';
                         }
                         return null;
                       },
+                      // onSaved: (newValue) => email = newValue,
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
-                      controller: _textController3,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        hintText: 'Phone Number',
-                        prefixIcon: Icon(Icons.phone, size: 20),
-                      ),
-                      style: Theme.of(context).textTheme.bodyText1,
-                      keyboardType: TextInputType.phone,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your phone number';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: _textController4,
+                      controller: password,
                       obscureText: _passwordVisibility1,
                       decoration: InputDecoration(
                         hintText: 'Password',
@@ -150,17 +128,18 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       style: Theme.of(context).textTheme.bodyText1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a password';
+                          return 'Anda harus mengisi password';
                         }
                         return null;
                       },
+                      // onSaved: (newValue) => password = newValue,
                     ),
                     const SizedBox(height: 10),
                     TextFormField(
-                      controller: _textController5,
+                      controller: confirmPassword,
                       obscureText: _passwordVisibility2,
                       decoration: InputDecoration(
-                        hintText: 'Confirm Password',
+                        hintText: 'Konfirmasi Password',
                         prefixIcon: Icon(Icons.lock_outlined),
                         suffixIcon: InkWell(
                           onTap: _togglePasswordVisibility2,
@@ -176,14 +155,55 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       style: Theme.of(context).textTheme.bodyText1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please confirm your password';
+                          return 'Anda harus menuliskan ulang password';
                         }
                         return null;
                       },
+                      // onSaved: (newValue) => confirmPassword = newValue,
                     ),
                     const SizedBox(height: 15),
                     ElevatedButton(
-                      onPressed: _submitForm,
+                      onPressed: () {
+                        /* validate */
+                        if (_registerKey.currentState!.validate()) {
+                          /* confirmed check */
+                          if (password.text != confirmPassword.text) {
+                            Flushbar(
+                              title: "Message from Ojak:",
+                              titleColor: Colors.black,
+                              message: 'Konfirmasi password anda tidak sesuai!',
+                              messageColor: Colors.black,
+                              duration: Duration(seconds: 3),
+                              backgroundColor: Colors.yellow.withOpacity(0.8),
+                            ).show(context);
+                          } else {
+                            /* register func */
+                            RegisterStful.regisAPI(
+                                    name.text, email.text, password.text)
+                                .then((value) {
+                              if (value.create) {
+                                Navigator.of(context).pop();
+
+                                Flushbar(
+                                  title: "Message from Ojak",
+                                  message:
+                                      "Berhasil membuat akun, silahkan login menggunakan email terdaftar.",
+                                  duration: Duration(seconds: 10),
+                                  backgroundColor:
+                                      Colors.green.withOpacity(0.8),
+                                ).show(context);
+                              }
+                            });
+                          }
+                        } else {
+                          Flushbar(
+                            title: "Message from Ojak:",
+                            message: 'Seluruh field tidak boleh kosong!',
+                            duration: Duration(seconds: 5),
+                            backgroundColor: Colors.red.withOpacity(0.8),
+                          ).show(context);
+                        }
+                      },
                       child: Text('Sign Up'),
                     ),
                     const SizedBox(height: 5),
@@ -196,7 +216,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed('login');
+                            Navigator.of(context).pop();
                           },
                           child: Text(
                             'Sign In',
@@ -211,6 +231,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   ],
                 ),
               ),
+              /* end form register */
             ),
           ),
         ),

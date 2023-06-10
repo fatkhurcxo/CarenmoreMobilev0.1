@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 class Pesanan extends StatefulWidget {
-  const Pesanan({
-    Key? key
-  }): super(key: key);
+  const Pesanan({Key? key}) : super(key: key);
 
   @override
   _PesananState createState() => _PesananState();
 }
 
-class _PesananState extends State < Pesanan > {
+class _PesananState extends State<Pesanan> {
   int _secondsRemaining = 5;
   Timer? _timer;
 
@@ -21,8 +19,7 @@ class _PesananState extends State < Pesanan > {
   }
 
   void startTimer() {
-    const oneSec =
-      const Duration(seconds: 1);
+    const oneSec = const Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
       (Timer timer) {
@@ -38,7 +35,6 @@ class _PesananState extends State < Pesanan > {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,10 +44,11 @@ class _PesananState extends State < Pesanan > {
         //leading: Container(),
       ),
       body: Column(
-        
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,7 +88,8 @@ class _PesananState extends State < Pesanan > {
               minimumSize: Size(130, 40),
               primary: Color(0xFF2F9DF5),
               textStyle: TextStyle(color: Colors.white),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
             ),
           ),
         ],
