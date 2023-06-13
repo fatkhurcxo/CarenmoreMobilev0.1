@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:tugasakhir/models/registerstful.dart';
-import '../providers/auth.dart';
 
 class RegisterWidget extends StatefulWidget {
   const RegisterWidget({Key? key}) : super(key: key);

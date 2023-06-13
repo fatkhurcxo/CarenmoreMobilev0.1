@@ -112,8 +112,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                         LoginStful.loginApi(email.text, password.text)
                             .then((value) {
                           if (value.login) {
-                            Navigator.pushNamed(context, 'menu',
-                                arguments: value.userId);
+                            Navigator.pushNamed(
+                              context,
+                              'menu',
+                              arguments: value.userId,
+                            );
 
                             showDialog(
                               context: context,

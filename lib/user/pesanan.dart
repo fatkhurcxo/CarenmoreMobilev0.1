@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class Pesanan extends StatefulWidget {
-  const Pesanan({Key? key}) : super(key: key);
+import 'package:tugasakhir/models/payment.dart';
 
+class Pesanan extends StatefulWidget {
+  const Pesanan({Key? key, required this.payment}) : super(key: key);
+  final Payment payment;
   @override
   _PesananState createState() => _PesananState();
 }
@@ -26,6 +28,7 @@ class _PesananState extends State<Pesanan> {
         setState(() {
           if (_secondsRemaining < 1) {
             timer.cancel();
+            print(widget.payment.checkoutUrl);
             // Timer berakhir, lakukan tindakan yang diinginkan di sini
           } else {
             _secondsRemaining = _secondsRemaining - 1;
@@ -37,48 +40,42 @@ class _PesananState extends State<Pesanan> {
 
   @override
   Widget build(BuildContext context) {
+    if (_secondsRemaining == 0) {
+      print("waktu habis");
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Menunggu Pesanan'),
+        title: const Text('Pesanan'),
         //leading: Container(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          Center(
+          const Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Mohon Ditunggu',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Colors.black,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  'Karyawan Kami Sedang Perjalanan Ke Alamat Anda',
+                  'Menunggu konfirmasi pesanan oleh admin',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 70),
+          const SizedBox(height: 70),
           Center(
             child: Text(
               '$_secondsRemaining',
-              style: TextStyle(fontSize: 72),
+              style: const TextStyle(fontSize: 72),
             ),
           ),
-          SizedBox(height: 100),
+          const SizedBox(height: 100),
           ElevatedButton(
             onPressed: () async {
               Navigator.pushNamed(context, 'selesai');
@@ -87,7 +84,7 @@ class _PesananState extends State<Pesanan> {
             style: ElevatedButton.styleFrom(
               minimumSize: Size(130, 40),
               primary: Color(0xFF2F9DF5),
-              textStyle: TextStyle(color: Colors.white),
+              textStyle: const TextStyle(color: Colors.white),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
             ),
