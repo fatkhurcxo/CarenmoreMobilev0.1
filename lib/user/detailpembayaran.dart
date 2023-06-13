@@ -20,6 +20,14 @@ class Detailpesanan extends StatefulWidget {
 
 class _DetailpesananState extends State<Detailpesanan> {
   TextEditingController datetimeinput = TextEditingController();
+
+  _launchURL() async {
+    final Uri url = Uri.parse(widget.payment.checkoutUrl);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   @override
   void initState() {
     datetimeinput.text = "";
@@ -294,7 +302,7 @@ class _DetailpesananState extends State<Detailpesanan> {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: _launchURL,
                 child: Text(
                   'Lakukan Pembayaran',
                   style: Theme.of(context).textTheme.headline6!.copyWith(
