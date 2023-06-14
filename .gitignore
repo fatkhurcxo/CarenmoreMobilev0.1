@@ -44,7 +44,4 @@ app.*.map.json
 /android/app/release
 
 # My Trial
-/lib/models/customer.dart
-/lib/models/newCustomer.dart
-/lib/providers/auth.dart
-/lib/providers/customer.dart
+
