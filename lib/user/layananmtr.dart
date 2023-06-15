@@ -30,7 +30,7 @@ class _LayananmtrState extends State<Layananmtr> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pilih layanan cuci mobil'),
+        title: Text('Pilih layanan cuci motor'),
       ),
       body: ListView.builder(
           itemCount: listMotor.length,

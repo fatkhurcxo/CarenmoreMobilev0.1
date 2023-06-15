@@ -82,7 +82,7 @@ class _DetailMobilState extends State<DetailMobil> {
                 fontSize: 35,
                 color: Colors.blueAccent),
           ),
-          Text('Haga: ${widget.mobil.harga}'),
+          Text('Harga: ${widget.mobil.harga}'),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
@@ -135,35 +135,37 @@ class _DetailMobilState extends State<DetailMobil> {
               ),
             ),
           ),
+          const SizedBox(
+            height: 16,
+          ),
           ElevatedButton(
               onPressed: () async {
-                Payment response = await makePayment.makePayment(
-                    widget.mobil.id,
-                    widget.customer.id,
-                    widget.mobil.providerId,
-                    widget.mobil.nama,
-                    widget.mobil.harga,
-                    value);
-                if (response.status == "proses") {
-                  print(response.pembayaran);
+                // Payment response = await makePayment.makePayment(
+                //     widget.mobil.id,
+                //     widget.customer.id,
+                //     widget.mobil.providerId,
+                //     widget.mobil.nama,
+                //     widget.mobil.harga,
+                //     value);
+                // if (response.status == "proses") {
+                //   print(response.pembayaran);
+                //   Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => Detailpesanan(
+                //             customer: widget.customer,
+                //             mobil: widget.mobil,
+                //             payment: response),
+                //       ));
+                  /* final function */
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Detailpesanan(
-                            customer: widget.customer,
-                            mobil: widget.mobil,
-                            payment: response),
-                      ));
-                  /* final function */
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => Pesanan(
-                  //               payment: response,
-                  //             )));
-                } else {
-                  print("response null");
-                }
+                          builder: (context) => Pesanan(
+                              )));
+                // } else {
+                //   print("response null");
+                // }
               },
               child: const Text("Pesan Sekarang"))
         ],

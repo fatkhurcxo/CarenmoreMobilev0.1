@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tugasakhir/services/cservice.dart';
 import 'package:tugasakhir/user/layananmbl.dart';
 import 'package:tugasakhir/user/order.dart';
+import 'package:tugasakhir/user/pesanan.dart';
 import '../models/customer.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -13,14 +15,22 @@ class HomeWidget extends StatefulWidget {
   State<HomeWidget> createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _HomeWidgetState extends State<HomeWidget> with SingleTickerProviderStateMixin{
   /* the customer model */
   late Future<Customer> futureCustomer;
+  late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(vsync: this);
   }
+
+  final List<String> imageList = [
+    'assets/images/gambar1.jpg',
+    'assets/images/gambar2.jpg',
+    'assets/images/gambar3.jpg',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -136,8 +146,36 @@ class _HomeWidgetState extends State<HomeWidget> {
                             ),
                           ),
                         ),
+                          SizedBox(
+                              height:25,
+                            ),
+                    CarouselSlider(
+                    options: CarouselOptions(
+                    height: MediaQuery.of(context).size.width * 0.5,
+                    autoPlay: true,
+                    aspectRatio: 3.0,
+                    enlargeCenterPage: true,
+                  ),
+                  items: imageList.map((imageUrl) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.symmetric(horizontal: 1),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              imageUrl,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
                         Container(
-                          margin: const EdgeInsets.only(top: 10.0),
+                          margin: const EdgeInsets.only(top: 25.0),
                           height: 550,
                           decoration: const BoxDecoration(),
                           // Text Selamat Datang

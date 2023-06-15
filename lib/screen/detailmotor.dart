@@ -64,7 +64,7 @@ class _DetailmotorState extends State<Detailmotor> {
                 fontSize: 35,
                 color: Colors.blueAccent),
           ),
-          Text('Haga: ${widget.motor.harga}'),
+          Text('Harga: ${widget.motor.harga}'),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
@@ -116,6 +116,9 @@ class _DetailmotorState extends State<Detailmotor> {
                 value: value,
               ),
             ),
+          ),
+          const SizedBox(
+            height: 16,
           ),
           ElevatedButton(
               onPressed: () {
