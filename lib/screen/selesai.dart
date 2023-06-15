@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tugasakhir/models/customer.dart';
 import 'dart:async';
 import 'package:tugasakhir/user/home.dart';
 
 class Selesai extends StatefulWidget {
-  const Selesai({Key? key}) : super(key: key);
+  const Selesai({Key? key, required this.customer}) : super(key: key);
+  final Customer customer;
 
   @override
   _SelesaiState createState() => _SelesaiState();
@@ -53,7 +55,7 @@ class _SelesaiState extends State<Selesai> {
                 child: Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: Image.asset(
-                    "assets/images/logo.png",// Ubah ukuran gambar di sini
+                    "assets/images/logo.png", // Ubah ukuran gambar di sini
                   ),
                 ),
               ),
@@ -85,14 +87,10 @@ class _SelesaiState extends State<Selesai> {
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: ElevatedButton(
                   onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomeWidget(),
-                      ),
-                    );
+                    Navigator.popAndPushNamed(context, 'menu',
+                        arguments: widget.customer.id);
                   },
-                  child: Text('Home'),
+                  child: Text('Kembali ke halaman utama'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     textStyle: Theme.of(context)

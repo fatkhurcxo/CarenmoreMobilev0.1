@@ -1,7 +1,11 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:tugasakhir/models/customer.dart';
 import 'package:tugasakhir/models/mobil.dart';
 import 'package:tugasakhir/models/payment.dart';
+import 'package:tugasakhir/models/transaksi.dart';
+import 'package:tugasakhir/services/trcservice.dart';
+import 'package:tugasakhir/user/pesanan.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Detailpesanan extends StatefulWidget {
@@ -20,6 +24,9 @@ class Detailpesanan extends StatefulWidget {
 
 class _DetailpesananState extends State<Detailpesanan> {
   TextEditingController datetimeinput = TextEditingController();
+
+  TransaksiService getDetailsTransaksi = TransaksiService();
+  late Future<Transaksi> detailData;
 
   _launchURL() async {
     final Uri url = Uri.parse(widget.payment.checkoutUrl);
@@ -305,6 +312,72 @@ class _DetailpesananState extends State<Detailpesanan> {
                 onPressed: _launchURL,
                 child: Text(
                   'Lakukan Pembayaran',
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                        fontFamily: 'Poppins',
+                        color: Colors.white,
+                      ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(88, 40),
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  primary: Theme.of(context).primaryColor,
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  Transaksi response = await getDetailsTransaksi
+                      .getDetailTransaksi(widget.payment.reference);
+
+                  print(response.pembayaran);
+
+                  if (response.pembayaran == 'unpaid') {
+                    return showDialog(
+                        context: context,
+                        builder: (context) {
+                          Future.delayed(Duration(seconds: 2), () {
+                            // Navigator.of(context).pop(true);
+                          });
+                          return AlertDialog(
+                            title: Text("Anda belum melakukan pembayaran"),
+                          );
+                        });
+                  } else if (response.pembayaran == 'paid') {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Pesanan(
+                              transaksi: response, customer: widget.customer),
+                        ));
+
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        Future.delayed(Duration(seconds: 2), () {
+                          Navigator.of(context).pop(true);
+                        });
+                        return AlertDialog(
+                          content: Text(
+                            'Pembayaran anda berhasil diverifikasi',
+                            style: TextStyle(color: Colors.green),
+                            textAlign: TextAlign.center,
+                          ),
+                          // backgroundColor: Colors.blue.withOpacity(0.7),
+                          icon: Icon(Icons.check_circle_outline_rounded,
+                              color: Colors.green),
+                        );
+                      },
+                    );
+                  }
+                },
+                child: Text(
+                  'Check Status',
                   style: Theme.of(context).textTheme.headline6!.copyWith(
                         fontFamily: 'Poppins',
                         color: Colors.white,

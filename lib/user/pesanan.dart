@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tugasakhir/models/customer.dart';
+import 'package:tugasakhir/models/transaksi.dart';
 import 'package:tugasakhir/screen/selesai.dart';
 import 'dart:async';
 
+import 'package:tugasakhir/services/updatepesanan.dart';
+
 class Pesanan extends StatefulWidget {
-  const Pesanan({Key? key}) : super(key: key);
+  const Pesanan({Key? key, required this.transaksi, required this.customer})
+      : super(key: key);
+  final Transaksi transaksi;
+  final Customer customer;
 
   @override
   _PesananState createState() => _PesananState();
@@ -11,7 +18,10 @@ class Pesanan extends StatefulWidget {
 
 class _PesananState extends State<Pesanan> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
- // Change this value as needed
+  // Change this value as needed
+
+  /* update service */
+  UpdatePesanan updatePesanan = UpdatePesanan();
 
   @override
   void initState() {
@@ -29,63 +39,64 @@ class _PesananState extends State<Pesanan> {
         title: Text(
           "Pesanan",
           style: TextStyle(color: Colors.white),
-              //fontWeight: FontWeight.bold, color: Color(0xFFF9683A),
+          //fontWeight: FontWeight.bold, color: Color(0xFFF9683A),
         ),
         //leading: Container(),
       ),
-        body: SafeArea(
-          top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: Center(
-                  child: Container(
-                    width: 350,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: Theme.of(context).textTheme.bodyText1!.color!,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 7, 0, 0),
-                          child: Text(
-                            'Pembayaran Anda Telah Berhasil',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
+      body: SafeArea(
+        top: true,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: Center(
+                child: Container(
+                  width: 350,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 4,
+                        color: Theme.of(context).textTheme.bodyText1!.color!,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 7, 0, 0),
+                        child: Text(
+                          'Pembayaran Anda Telah Berhasil',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 2, 0, 0),
-                          child: Text(
-                            'Mohon Tunggu KaryawanKami Sedang Menuju Alamat Anda',
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 2, 0, 0),
+                        child: Text(
+                          'Mohon Tunggu KaryawanKami Sedang Menuju Alamat Anda',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText1,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Center(
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Center(
+                child: Flexible(
                   child: Container(
                     width: 350,
                     height: 300,
@@ -112,7 +123,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
                                 child: Text(
-                                  'Status Pembayaran',
+                                  'No. Referensi Pesanan',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -125,7 +136,8 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
                                 child: Text(
-                                  'Menunggu',
+                                  widget.transaksi.reference,
+                                  overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.end,
                                   style: Theme.of(context)
                                       .textTheme
@@ -161,7 +173,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
                                 child: Text(
-                                  'Menunggu',
+                                  widget.transaksi.pembayaran,
                                   textAlign: TextAlign.end,
                                   style: Theme.of(context)
                                       .textTheme
@@ -182,7 +194,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
                                 child: Text(
-                                  'Status Pembayaran',
+                                  'Status Pesanan',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -195,7 +207,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
                                 child: Text(
-                                  'Menunggu',
+                                  widget.transaksi.status,
                                   textAlign: TextAlign.end,
                                   style: Theme.of(context)
                                       .textTheme
@@ -216,7 +228,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
                                 child: Text(
-                                  'Status Pembayaran',
+                                  'Nominal Pembayaran',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -229,7 +241,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
                                 child: Text(
-                                  'Menunggu',
+                                  'Rp.${widget.transaksi.nominal}',
                                   textAlign: TextAlign.end,
                                   style: Theme.of(context)
                                       .textTheme
@@ -250,7 +262,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
                                 child: Text(
-                                  'Status Pembayaran',
+                                  'Nama Pemesan :',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -263,7 +275,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
                                 child: Text(
-                                  'Menunggu',
+                                  widget.customer.nama,
                                   textAlign: TextAlign.end,
                                   style: Theme.of(context)
                                       .textTheme
@@ -284,7 +296,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
                                 child: Text(
-                                  'Status Pembayaran',
+                                  'Alamat :',
                                   textAlign: TextAlign.start,
                                   style: Theme.of(context)
                                       .textTheme
@@ -297,7 +309,7 @@ class _PesananState extends State<Pesanan> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
                                 child: Text(
-                                  'Menunggu',
+                                  widget.customer.alamat,
                                   textAlign: TextAlign.end,
                                   style: Theme.of(context)
                                       .textTheme
@@ -315,68 +327,78 @@ class _PesananState extends State<Pesanan> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                child: Container(
-                  width: 350,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 4,
-                        color: Theme.of(context).textTheme.bodyText1!.color!,
-                          offset: Offset(0, 2),
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                        child: Text(
-                          'Klik Selesaikan Pesanan Ketika Pegawai Telah Selesai Membersihkan Kendaraan Anda',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Selesai(
-                              )));
-                  },
-                  child: Text('Selesaikan Pesanan'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    textStyle: Theme.of(context)
-                        .textTheme
-                        .subtitle1!
-                        .copyWith(color: Colors.white),
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Container(
+                width: 350,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Theme.of(context).textTheme.bodyText1!.color!,
+                      offset: Offset(0, 2),
                     ),
-                    padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
-                  ),
+                  ],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      child: Text(
+                        'Klik Selesaikan Pesanan Ketika Pegawai Telah Selesai Membersihkan Kendaraan Anda',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  UpdatePesanan response = await updatePesanan
+                      .updatePesanan(widget.transaksi.reference);
+                  print(response.data);
+                  if (response.data == 1) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Selesai(
+                            customer: widget.customer,
+                          ),
+                        ));
+                  }
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => Selesai()));
+                },
+                child: Text('Selesaikan Pesanan'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .subtitle1!
+                      .copyWith(color: Colors.white),
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
+                ),
+              ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }

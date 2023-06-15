@@ -140,32 +140,33 @@ class _DetailMobilState extends State<DetailMobil> {
           ),
           ElevatedButton(
               onPressed: () async {
-                // Payment response = await makePayment.makePayment(
-                //     widget.mobil.id,
-                //     widget.customer.id,
-                //     widget.mobil.providerId,
-                //     widget.mobil.nama,
-                //     widget.mobil.harga,
-                //     value);
-                // if (response.status == "proses") {
-                //   print(response.pembayaran);
-                //   Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) => Detailpesanan(
-                //             customer: widget.customer,
-                //             mobil: widget.mobil,
-                //             payment: response),
-                //       ));
-                  /* final function */
+                Payment response = await makePayment.makePayment(
+                    widget.mobil.id,
+                    widget.customer.id,
+                    widget.mobil.providerId,
+                    widget.mobil.nama,
+                    widget.mobil.harga,
+                    value);
+                if (response.status == "proses") {
+                  print(response.pembayaran);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Pesanan(
-                              )));
-                // } else {
-                //   print("response null");
-                // }
+                        builder: (context) => Detailpesanan(
+                            customer: widget.customer,
+                            mobil: widget.mobil,
+                            payment: response),
+                      ));
+                  /* final function */
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => Pesanan(
+                  //             )));
+                  // } else {
+                  //   print("response null");
+                  // }
+                }
               },
               child: const Text("Pesan Sekarang"))
         ],
