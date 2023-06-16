@@ -6,16 +6,19 @@ import 'package:tugasakhir/screen/detailmobil.dart';
 import 'package:tugasakhir/services/mblservice.dart';
 
 class MobilLayanan extends StatefulWidget {
-  const MobilLayanan({Key? key, required this.customer}) : super(key: key);
+  const MobilLayanan({
+    Key ? key,
+    required this.customer
+  }): super(key: key);
   final Customer customer;
 
   @override
-  State<MobilLayanan> createState() => _MobilLayananState();
+  State < MobilLayanan > createState() => _MobilLayananState();
 }
 
-class _MobilLayananState extends State<MobilLayanan> {
+class _MobilLayananState extends State < MobilLayanan > {
   /* the model of layanan mobil */
-  List<Mobil> listMobil = [];
+  List < Mobil > listMobil = [];
   /* the service */
   Mblservice mblservice = Mblservice();
 
@@ -40,23 +43,23 @@ class _MobilLayananState extends State<MobilLayanan> {
         title: Text('Pilih layanan cuci mobil'),
       ),
       body: ListView.builder(
-          itemCount: listMobil.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailMobil(
-                              mobil: listMobil[index],
-                              customer: widget.customer,
-                            )));
-              },
-              child: Card(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
+        itemCount: listMobil.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailMobil(
+                    mobil: listMobil[index],
+                    customer: widget.customer,
+                  )));
+                  },
+            child: Card(
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(30),
                         child: Image.asset(
@@ -67,31 +70,32 @@ class _MobilLayananState extends State<MobilLayanan> {
                         ),
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(listMobil[index].nama,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.blueAccent)),
-                        Text('lokasi : ${listMobil[index].jenis}'),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text('HTM : ${listMobil[index].harga}'),
-                            ],
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(listMobil[index].nama,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: Colors.blueAccent)),
+                      Text('lokasi : ${listMobil[index].jenis}'),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text('HTM : ${listMobil[index].harga}'),
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
-            );
-          }),
+            ),
+          );
+        }
+      ),
     );
   }
 }

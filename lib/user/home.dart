@@ -126,17 +126,7 @@ class _HomeWidgetState extends State<HomeWidget>
                                               ),
                                             ),
                                             // Icon Button
-                                            IconButton(
-                                              icon: const Icon(
-                                                Icons.edit_note_rounded,
-                                                color: Colors.white,
-                                                size: 25,
-                                              ),
-                                              onPressed: () async {
-                                                Navigator.pushNamed(
-                                                    context, 'editdata');
-                                              },
-                                            ),
+                                            
                                           ],
                                         ),
                                       ],

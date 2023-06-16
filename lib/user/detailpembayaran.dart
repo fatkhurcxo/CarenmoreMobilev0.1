@@ -62,7 +62,8 @@ class _DetailpesananState extends State<Detailpesanan> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 50, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+              child: Center(
               child: Container(
                 width: 350,
                 height: 200,
@@ -79,7 +80,7 @@ class _DetailpesananState extends State<Detailpesanan> {
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -160,7 +161,7 @@ class _DetailpesananState extends State<Detailpesanan> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
+                            padding: EdgeInsets.fromLTRB(60, 10, 0, 0),
                             child: Text(
                               widget.payment.status,
                               style: Theme.of(context)
@@ -194,7 +195,7 @@ class _DetailpesananState extends State<Detailpesanan> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(80, 10, 0, 0),
+                            padding: EdgeInsets.fromLTRB(35, 10, 0, 0),
                             child: Text(
                               widget.payment.pembayaran,
                               style: Theme.of(context)
@@ -228,7 +229,7 @@ class _DetailpesananState extends State<Detailpesanan> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(110, 10, 0, 0),
+                            padding: EdgeInsets.fromLTRB(70, 10, 0, 0),
                             child: Text(
                               widget.payment.reference,
                               style: Theme.of(context)
@@ -247,8 +248,9 @@ class _DetailpesananState extends State<Detailpesanan> {
                 ),
               ),
             ),
+            ),
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Container(
                 width: 350,
                 height: 100,
@@ -307,7 +309,7 @@ class _DetailpesananState extends State<Detailpesanan> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 250, 0, 0),
               child: ElevatedButton(
                 onPressed: _launchURL,
                 child: Text(
@@ -329,7 +331,7 @@ class _DetailpesananState extends State<Detailpesanan> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: ElevatedButton(
                 onPressed: () async {
                   Transaksi response = await getDetailsTransaksi

@@ -71,7 +71,7 @@ class _PesananState extends State<Pesanan> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 7, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child: Text(
                           'Pembayaran Anda Telah Berhasil',
                           style: TextStyle(
@@ -81,7 +81,7 @@ class _PesananState extends State<Pesanan> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 2, 0, 0),
+                        padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
                         child: Text(
                           'Mohon Tunggu KaryawanKami Sedang Menuju Alamat Anda',
                           textAlign: TextAlign.center,
@@ -121,7 +121,7 @@ class _PesananState extends State<Pesanan> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                                 child: Text(
                                   'No. Referensi Pesanan',
                                   textAlign: TextAlign.start,
@@ -134,7 +134,7 @@ class _PesananState extends State<Pesanan> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
                                 child: Text(
                                   widget.transaksi.reference,
                                   overflow: TextOverflow.ellipsis,
@@ -158,7 +158,7 @@ class _PesananState extends State<Pesanan> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                                 child: Text(
                                   'Status Pembayaran',
                                   textAlign: TextAlign.start,
@@ -171,7 +171,7 @@ class _PesananState extends State<Pesanan> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(40, 10, 0, 0),
                                 child: Text(
                                   widget.transaksi.pembayaran,
                                   textAlign: TextAlign.end,
@@ -192,7 +192,7 @@ class _PesananState extends State<Pesanan> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                                 child: Text(
                                   'Status Pesanan',
                                   textAlign: TextAlign.start,
@@ -205,7 +205,7 @@ class _PesananState extends State<Pesanan> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(65, 10, 0, 0),
                                 child: Text(
                                   widget.transaksi.status,
                                   textAlign: TextAlign.end,
@@ -226,7 +226,7 @@ class _PesananState extends State<Pesanan> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                                 child: Text(
                                   'Nominal Pembayaran',
                                   textAlign: TextAlign.start,
@@ -239,7 +239,7 @@ class _PesananState extends State<Pesanan> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(28, 10, 0, 0),
                                 child: Text(
                                   'Rp.${widget.transaksi.nominal}',
                                   textAlign: TextAlign.end,
@@ -260,7 +260,7 @@ class _PesananState extends State<Pesanan> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                                 child: Text(
                                   'Nama Pemesan :',
                                   textAlign: TextAlign.start,
@@ -273,7 +273,7 @@ class _PesananState extends State<Pesanan> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(55, 10, 0, 0),
                                 child: Text(
                                   widget.customer.nama,
                                   textAlign: TextAlign.end,
@@ -294,7 +294,7 @@ class _PesananState extends State<Pesanan> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                                 child: Text(
                                   'Alamat :',
                                   textAlign: TextAlign.start,
@@ -307,7 +307,7 @@ class _PesananState extends State<Pesanan> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(100, 10, 0, 0),
+                                padding: EdgeInsets.fromLTRB(110, 10, 0, 0),
                                 child: Text(
                                   widget.customer.alamat,
                                   textAlign: TextAlign.end,
@@ -349,7 +349,7 @@ class _PesananState extends State<Pesanan> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                      padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
                       child: Text(
                         'Klik Selesaikan Pesanan Ketika Pegawai Telah Selesai Membersihkan Kendaraan Anda',
                         textAlign: TextAlign.center,
@@ -363,7 +363,7 @@ class _PesananState extends State<Pesanan> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+              padding: EdgeInsets.fromLTRB(0, 200, 0, 0),
               child: ElevatedButton(
                 onPressed: () async {
                   UpdatePesanan response = await updatePesanan

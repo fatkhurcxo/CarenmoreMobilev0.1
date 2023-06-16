@@ -136,7 +136,7 @@ class _DetailMobilState extends State<DetailMobil> {
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 150,
           ),
           ElevatedButton(
               onPressed: () async {

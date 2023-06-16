@@ -118,7 +118,7 @@ class _DetailmotorState extends State<Detailmotor> {
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 150,
           ),
           ElevatedButton(
               onPressed: () {
