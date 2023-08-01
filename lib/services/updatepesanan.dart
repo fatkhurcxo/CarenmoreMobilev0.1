@@ -2,22 +2,24 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class UpdatePesanan {
-  final String? message;
-  final int? data;
+  final int? message;
+  // final int? data;
 
-  UpdatePesanan({this.message, this.data});
+  UpdatePesanan({this.message});
 
   Future updatePesanan(String ref) async {
+    // https: //kaptenojak.my.id/api/updatepesanan
     try {
-      final response = await http
-          .patch(Uri.parse("https://kaptenojak.my.id/api/updatepesanan/$ref"));
+      final response =
+          await http.patch(Uri.parse("http://192.168.227.62/api/detail/$ref"));
 
       print(response.statusCode);
-      if (response.statusCode == 202) {
+      print(response.body);
+      if (response.statusCode == 200) {
         final data = json.decode(response.body);
         print(data);
 
-        return UpdatePesanan(message: data['message'], data: data['data']);
+        return UpdatePesanan(message: data['message']);
       }
     } catch (e) {
       print(e.toString());

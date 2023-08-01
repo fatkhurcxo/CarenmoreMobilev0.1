@@ -366,10 +366,11 @@ class _PesananState extends State<Pesanan> {
               padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
               child: ElevatedButton(
                 onPressed: () async {
+                  print(widget.transaksi.reference);
                   UpdatePesanan response = await updatePesanan
                       .updatePesanan(widget.transaksi.reference);
-                  print(response.data);
-                  if (response.data == 1) {
+                  print(response.message);
+                  if (response.message == 1) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(

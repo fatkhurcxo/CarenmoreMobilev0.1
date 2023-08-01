@@ -1,13 +1,13 @@
 class Transaksi {
   final int id;
-  final String layananId;
-  final String providerId;
-  final String customerId;
-  final String berlangganan;
+  final int layananId;
+  final int providerId;
+  final int customerId;
+  final int berlangganan;
   final String reference;
   final String pembayaran;
   final String status;
-  final String nominal;
+  final int nominal;
 
   Transaksi(
       {required this.id,

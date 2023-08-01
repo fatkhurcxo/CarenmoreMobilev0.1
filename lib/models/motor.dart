@@ -1,13 +1,13 @@
 class Motor {
   final int id;
-  final String providerId,
-      nama,
-      kendaraan,
-      tempat,
-      air,
-      jenis,
-      harga,
-      deskripsi;
+  final int providerId;
+  final String nama;
+  final String kendaraan;
+  final int tempat;
+  final int air;
+  final String jenis;
+  final int harga;
+  final String deskripsi;
 
   Motor({
     required this.id,

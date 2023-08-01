@@ -10,10 +10,11 @@ class LoginStful {
       {required this.login, required this.message, required this.userId});
 
   static Future<LoginStful> loginApi(String email, String password) async {
-    Uri customerLogin = Uri.parse("https://kaptenojak.my.id/api/login");
+    // Uri customerLogin = Uri.parse("https://kaptenojak.my.id/api/login");
+    Uri localNetwork = Uri.parse("http://192.168.227.62:80/api/userlogin");
 
     var response = await http
-        .post(customerLogin, body: {"email": email, "password": password});
+        .post(localNetwork, body: {"email": email, "password": password});
 
     var data = json.decode(response.body);
 

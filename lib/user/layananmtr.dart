@@ -28,6 +28,7 @@ class _LayananmtrState extends State<Layananmtr> {
 
   @override
   Widget build(BuildContext context) {
+    print(listMotor);
     return Scaffold(
       appBar: AppBar(
         title: Text('Pilih layanan cuci motor'),

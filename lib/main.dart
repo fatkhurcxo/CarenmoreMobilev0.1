@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:tugasakhir/screen/login.dart';
 import 'package:tugasakhir/screen/register.dart';
 import 'package:tugasakhir/screen/splashscreen.dart';
-import 'package:tugasakhir/screen/selesai.dart';
+// import 'package:tugasakhir/screen/selesai.dart';
 import 'package:tugasakhir/user/home.dart';
 import 'package:tugasakhir/user/editdata.dart';
 import 'package:tugasakhir/user/layananmtr.dart';

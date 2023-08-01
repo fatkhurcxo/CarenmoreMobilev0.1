@@ -28,8 +28,8 @@ class _MobilLayananState extends State<MobilLayanan> {
 
   @override
   void initState() {
-    super.initState();
     getData();
+    super.initState();
   }
 
   @override

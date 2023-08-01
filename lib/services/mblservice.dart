@@ -7,15 +7,16 @@ class Mblservice {
   Future fetchMobil() async {
     try {
       final response =
-          await http.get(Uri.parse("https://kaptenojak.my.id/api/mobils"));
+          await http.get(Uri.parse("http://192.168.227.62:80/api/mobils"));
+      // https: //kaptenojak.my.id/api/mobils
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body)['data'];
         // print(data);
+        // print('get sata success');
         // print(jsonDecode(response.body)['data']);
         Iterable itr = data;
         List<Mobil> mobil = itr.map((e) => Mobil.fromJson(e)).toList();
-        // print(mobil);
         return mobil;
       }
     } catch (e) {

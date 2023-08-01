@@ -35,18 +35,20 @@ class _DetailMobilState extends State<DetailMobil> {
   var value;
 
   Future getChannels() async {
-    final response = await http
-        .get(Uri.parse("https://kaptenojak.my.id/api/tripaychannels"));
+    final response =
+        await http.get(Uri.parse("http://192.168.227.62/api/channel"));
+    // https: //kaptenojak.my.id/api/tripaychannels
 
     setState(() {
-      listPayment = json.decode(response.body)['data'];
+      listPayment = json.decode(response.body);
+      print(listPayment);
     });
   }
 
   @override
   void initState() {
-    super.initState();
     getChannels();
+    super.initState();
   }
 
   @override

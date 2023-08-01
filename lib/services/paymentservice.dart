@@ -4,12 +4,13 @@ import 'package:http/http.dart' as http;
 import 'package:tugasakhir/models/payment.dart';
 
 class PaymentService {
-  Future makePayment(int layananId, int customerId, String providerId,
-      String namaLayanan, String nominal, String code) async {
+  Future makePayment(int layananId, int customerId, int providerId,
+      String namaLayanan, int nominal, String code) async {
     try {
       // print("status aman");
+      // https: //kaptenojak.my.id/api/makepayment
       final response =
-          await http.post(Uri.parse("https://kaptenojak.my.id/api/makepayment"),
+          await http.post(Uri.parse("http://192.168.227.62/api/make"),
               headers: {
                 "content-type": "application/json",
               },
@@ -21,9 +22,14 @@ class PaymentService {
                 "nominal": nominal,
                 "code": code
               }));
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         var data = json.decode(response.body)['data'];
-        print(data);
+        print(data['reference']);
+        print(data['pembayaran']);
+        print(data['status']);
+        print(data['created_at']);
+        print(data['nominal']);
+        print(data['payment_url']);
         // var data = json.encode(response.body);
         return Payment(
             reference: data['reference'],

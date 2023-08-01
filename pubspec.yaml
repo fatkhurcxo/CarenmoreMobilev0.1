@@ -44,6 +44,12 @@ dependencies:
   dio: ^5.2.0+1
   flutter_carousel_slider: ^1.1.0
   url_launcher: ^6.1.11
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/laucher_logos/carenmore.png"
 
 dev_dependencies:
   flutter_test:

@@ -2,7 +2,7 @@ class Customer {
   final String message;
   final String alamat;
   final String nama;
-  final String coin;
+  final int coin;
   final String status;
   final int id;
 
